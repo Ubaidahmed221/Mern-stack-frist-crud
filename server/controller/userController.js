@@ -17,4 +17,18 @@ export const create = async (req , res) =>{
         res.status(500).json({errorMessage: error.message});
 
     }
+};
+
+export const getAllUsers = async (req, res) =>{
+    try{
+        const userdata = await User.find();
+        if(userdata && userdata.length == 0){
+            return res.status(404).json({message: "User data not found."});
+        }
+        res.status(200).json(userdata);
+    }
+    catch(error){
+        res.status(500).json({errorMessage: error.message});
+
+    }
 }
